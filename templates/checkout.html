@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-4 checkout-page">
+  <div class="row g-4">
+    <!-- LEFT: FORM -->
+    <div class="col-lg-7">
+      <div class="card checkout-card p-4">
+        <h3 class="mb-4">Checkout</h3>
+
+        <!-- Customer Details -->
+        <h6 class="section-title">Customer Details</h6>
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Full Name *</label>
+            <input id="custName" class="form-control" placeholder="Your name">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Phone Number *</label>
+            <input id="custPhone" class="form-control" placeholder="0xx xxx xxx">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Email (optional)</label>
+            <input id="custEmail" class="form-control" placeholder="example@gmail.com">
+          </div>
+        </div>
+
+        <!-- Shipping Details -->
+        <h6 class="section-title">Shipping Details</h6>
+        <div class="row g-3 mb-3">
+          <div class="col-12">
+            <label class="form-label">Street Address *</label>
+            <input id="shipAddress" class="form-control" placeholder="Your address">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Postal Code</label>
+            <input id="shipPostal" class="form-control" placeholder="12000">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">City</label>
+            <input id="shipCity" class="form-control" placeholder="Phnom Penh">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Country</label>
+            <select id="shipCountry" class="form-select">
+              <option value="Cambodia" selected>Cambodia</option>
+              <option value="Indonesie">Indonesie</option>
+              <option value="Vietnam">Vietnam</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <h6 class="section-title">Payment Method</h6>
+        <div class="row g-3 mb-3">
+          <div class="col-12">
+            <div class="d-flex flex-wrap gap-3">
+              <label class="pay-pill">
+                <input type="radio" name="pay" value="paypal">
+                <span>PayPal</span>
+              </label>
+              <label class="pay-pill active">
+                <input type="radio" name="pay" value="card" checked>
+                <span>Credit / Debit Card</span>
+              </label>
+              <label class="pay-pill">
+                <input type="radio" name="pay" value="cod">
+                <span>COD</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Card Number</label>
+            <input id="cardNumber" class="form-control" placeholder="xxxx xxxx xxxx xxxx">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Expiry</label>
+            <input id="cardExpiry" class="form-control" placeholder="08/2027">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">CVV</label>
+            <input id="cardCvv" class="form-control" placeholder="000">
+          </div>
+        </div>
+
+        <div class="alert alert-danger d-none" id="checkoutError"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: SUMMARY -->
+    <div class="col-lg-5">
+      <div class="card checkout-card p-4 summary-card">
+        <h5 class="mb-3">Order Summary</h5>
+
+        <!-- ✅ ONLY ONE summaryItems -->
+        <div id="summaryItems" class="summary-items"></div>
+
+        <div class="mt-3">
+          <label class="form-label">Discount Code</label>
+          <div class="d-flex gap-2">
+            <input id="discountCode" class="form-control" placeholder="WELCOME10">
+            <button id="applyDiscountBtn" type="button" class="btn btn-dark px-3">Apply</button>
+
+            <!-- <button id="checkoutBtn" type="button" class="btn btn-dark w-100 mt-3 py-3"> -->
+              <!-- Check Out -->
+            <!-- </button> -->
+
+          </div>
+          <div class="small text-muted mt-1" id="discountHint"></div>
+        </div>
+
+        <hr class="my-3">
+
+        <div class="totals">
+          <div class="d-flex justify-content-between">
+            <span>Subtotal</span>
+            <span id="subTotal">$0.00</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span>Shipping</span>
+            <span id="shipFee">$0.00</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span>Discount</span>
+            <span id="discountAmt">$0.00</span>
+          </div>
+          <div class="d-flex justify-content-between fw-bold fs-5 mt-2">
+            <span>Total</span>
+            <span id="grandTotal">$0.00</span>
+          </div>
+        </div>
+
+        <button id="checkoutBtn" class="btn btn-dark w-100 mt-3 py-3">
+          Check Out
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/checkout.js"></script>
+{% endblock %}

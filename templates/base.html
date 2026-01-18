@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ title or "OmniCart" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/static/assets/logo.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+  <!-- ✅ Modern Topbar -->
+  <header class="oc-topbar">
+    <div class="oc-topbar-inner container">
+      <!-- Left: Brand -->
+      <a href="/" class="oc-brand">
+        <span class="oc-brand-mark">🛍️</span>
+        <span class="oc-brand-text">OmniCart</span>
+      </a>
+
+      <!-- Center: Delivery pill
+      <div class="oc-delivery-pill" title="Service coverage">
+        <span class="oc-pill-ico">🚚</span>
+        <span class="oc-pill-text">Delivery to 25 provinces/cities</span>
+      </div> -->
+
+      <!-- Right: Actions -->
+      <nav class="oc-actions">
+        <a class="oc-action-btn" href="/public">
+          <span>Customer View</span>
+        </a>
+
+        <a class="oc-icon-btn" href="/cart" title="Cart">
+          🛒
+          <span id="cartCount" class="oc-badge">0</span>
+        </a>
+
+        <a class="oc-icon-btn" href="/login" title="Login">👤</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- Main content grows to push footer down -->
+  <main class="container py-4 flex-grow-1">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer class="site-footer mt-auto">
+    <div class="container text-center py-3 text-white small">
+      © 2026 OmniCart · Inventory & Sales System
+      <div>Developed for academic use</div>
+    </div>
+  </footer>
+
+  <!-- ✅ Toast (must be inside body) -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+    <!-- ✅ Generic App Toast (success/error/info) -->
+    <div id="appToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="appToastBody">Hello 👋</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+
+    <!-- Existing cart toast -->
+    <div id="cartToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          Added to cart ✅
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Bootstrap JS first -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ✅ UI helpers (toasts, loading buttons, safe fetch) -->
+  <script src="/static/js/ui.js"></script>
+
+  <!-- ✅ Badge updater after Bootstrap -->
+  <script src="/static/js/cart_badge.js"></script>
+
+</body>
+</html>

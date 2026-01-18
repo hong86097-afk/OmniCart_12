@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+
+  <!-- SIDEBAR -->
+  <div class="col-md-3 col-lg-2 mb-3">
+    <div class="card shadow-sm rounded-4">
+      <div class="card-body p-2">
+
+        <div class="fw-bold text-center mb-2">
+          {{ session.get("role", "").capitalize() }} Panel
+        </div>
+
+        <div class="list-group list-group-flush">
+          <a href="/dashboard" class="list-group-item list-group-item-action">
+            📊 Dashboard
+          </a>
+          <a href="/products" class="list-group-item list-group-item-action">
+            📦 Products
+          </a>
+          <a href="/sales" class="list-group-item list-group-item-action">
+            🧾 Sales
+          </a>
+          <a href="/customers" class="list-group-item list-group-item-action">
+            👥 Customers
+          </a>
+          <a href="/reports" class="list-group-item list-group-item-action">
+            📈 Reports
+          </a>
+          <a href="/logout" class="list-group-item list-group-item-action text-danger">
+            🚪 Logout
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="col-md-9 col-lg-10">
+    {% block dashboard_content %}{% endblock %}
+  </div>
+
+</div>
+{% endblock %}

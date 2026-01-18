@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Product Detail Modal -->
+<div class="modal fade" id="productModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content rounded-4 overflow-hidden">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <img id="modalImg" class="w-100 rounded-4 border" style="height:260px; object-fit:cover;" />
+          </div>
+
+          <div class="col-md-6">
+            <div class="text-muted small mb-1" id="modalCategory"></div>
+            <div class="fs-3 fw-bold mb-2" id="modalName"></div>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <span class="badge bg-primary" id="modalStock"></span>
+              <span class="badge bg-success" id="modalPrice"></span>
+            </div>
+
+            <p class="text-muted" id="modalDesc">
+              High-quality product available in our store. Limited stock, order soon!
+            </p>
+
+            <a class="btn btn-dark w-100" id="modalContact" target="_blank">
+              Contact to Order
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="m-0">Available Products</h3>
+  <span class="badge bg-success">In Stock Only</span>
+</div>
+
+<div class="card shadow-sm rounded-4 mb-3">
+  <div class="card-body">
+    <div class="row g-2">
+      <div class="col-md-8">
+        <input id="publicSearch" class="form-control" placeholder="Search product name...">
+      </div>
+      <div class="col-md-4">
+        <select id="publicCategory" class="form-select">
+          <option value="">All Categories</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Controls (NO category chips) -->
+<div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+  <div id="resultCount" class="text-muted small"></div>
+
+  <div class="ms-auto d-flex align-items-center gap-2">
+    <select id="publicSort" class="form-select" style="min-width:220px;">
+      <option value="default">Sort: Default</option>
+      <option value="price_asc">Price: Low → High</option>
+      <option value="price_desc">Price: High → Low</option>
+      <option value="name_asc">Name: A → Z</option>
+      <option value="name_desc">Name: Z → A</option>
+    </select>
+
+    <button id="clearFilters" class="btn btn-outline-secondary btn-sm">
+      Clear
+    </button>
+  </div>
+</div>
+
+<!-- Products Grid -->
+<div id="publicGrid" class="row g-3">
+  <div class="text-muted">Loading...</div>
+</div>
+
+<!-- ✅ Only keep scripts at the bottom -->
+<script src="/static/js/public.js"></script>
+<script src="/static/js/cart.js"></script>
+
+{% endblock %}
