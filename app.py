@@ -30,5 +30,5 @@ def create_app():
 # 👇 IMPORTANT: this line is REQUIRED for Gunicorn
 app = create_app()
 
-if __name__ == "main":
+if __name__ == "__main__":
     app.run(debug=True)
