@@ -1,4 +1,6 @@
-from flask import Flask, session, redirect
+from flask import Flask, session, redirect, url_for
+from flask_cors import CORS
+
 from config import Config
 
 from routes.auth_routes import auth_bp
@@ -15,7 +17,7 @@ def create_app():
     @app.route("/logout")
     def logout():
         session.clear()
-        return redirect("/")
+        return redirect("/")   # safer than url_for("home")
 
     # Register blueprints
     app.register_blueprint(auth_bp)
@@ -27,7 +29,6 @@ def create_app():
 
     return app
 
-# 👇 IMPORTANT: this line is REQUIRED for Gunicorn
 app = create_app()
 
 if __name__ == "__main__":

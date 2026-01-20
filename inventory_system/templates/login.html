@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header bg-white">
+        <strong>Business Login ({{ role|capitalize }})</strong>
+      </div>
+      <div class="card-body">
+        <form id="loginForm" class="row g-2">
+          <div class="col-md-6">
+            <input class="form-control" id="username" placeholder="Username" required>
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" id="password" type="password" placeholder="Password" required>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-dark w-100" type="submit">Login</button>
+          </div>
+        </form>
+
+        <div id="msg" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/auth.js"></script>
+{% endblock %}

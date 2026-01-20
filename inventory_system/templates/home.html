@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero -->
+<section class="hero-wrap py-5">
+  <div class="container">
+    <div class="hero-card p-4 p-md-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <div class="badge-soft mb-3">
+            <span class="dot"></span> Bringing your store to your screen
+          </div>
+
+          <h1 class="display-6 fw-bold mb-3">
+            OmniCart Mart 🚀
+          </h1>
+
+          <p class="lead mb-4">
+            Manage products, customers, and sales with a clean dashboard.
+            Customers can browse and order without logging in.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/public" class="btn btn-warning btn-lg px-4">
+              View as Customer 🛒
+            </a>
+            <a href="/login" class="btn btn-outline-light btn-lg px-4">
+              Staff Login 🔐
+            </a>
+          </div>
+
+          <div class="hero-mini mt-4">
+            <div class="mini-item">
+              <div class="mini-num">⚡</div>
+              <div>
+                <div class="mini-title">Fast</div>
+                <div class="mini-sub">Excel-backed system</div>
+              </div>
+            </div>
+            <div class="mini-item">
+              <div class="mini-num">📦</div>
+              <div>
+                <div class="mini-title">Inventory</div>
+                <div class="mini-sub">Low-stock alerts</div>
+              </div>
+            </div>
+            <div class="mini-item">
+              <div class="mini-num">📊</div>
+              <div>
+                <div class="mini-title">Reports</div>
+                <div class="mini-sub">Sales history</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="glass-panel p-4">
+            <div class="stat-grid">
+              <div class="stat">
+                <div class="stat-icon">🧾</div>
+                <div class="stat-label">Invoices</div>
+                <div class="stat-value">Auto generated</div>
+              </div>
+              <div class="stat">
+                <div class="stat-icon">👥</div>
+                <div class="stat-label">Customers</div>
+                <div class="stat-value">Member / Normal</div>
+              </div>
+              <div class="stat">
+                <div class="stat-icon">🛍️</div>
+                <div class="stat-label">Public Shop</div>
+                <div class="stat-value">No login</div>
+              </div>
+              <div class="stat">
+                <div class="stat-icon">✅</div>
+                <div class="stat-label">Stock Control</div>
+                <div class="stat-value">Real-time</div>
+              </div>
+            </div>
+
+            <hr class="border-light opacity-25 my-4">
+
+            <div class="small text-white-50">
+              Tip: try the <b>Customer View</b> to browse products and checkout instantly ✨
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature cards -->
+    <div class="row g-3 g-md-4 mt-4">
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="feature-icon">📦</div>
+          <h5 class="fw-bold mb-2">Inventory Control</h5>
+          <p class="text-muted mb-0">
+            Track stock in real time, low-stock alerts, clean product management.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="feature-icon">📈</div>
+          <h5 class="fw-bold mb-2">Sales & History</h5>
+          <p class="text-muted mb-0">
+            Record sales, auto-reduce stock, view sales history like a real shop.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="feature-icon">👤</div>
+          <h5 class="fw-bold mb-2">Roles</h5>
+          <p class="text-muted mb-0">
+            Staff can edit, Manager view-only, Customer public view (no login).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA strip -->
+    <div class="cta-strip mt-4">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+        <div>
+          <div class="cta-title">Ready to explore the shop?</div>
+          <div class="cta-sub">Browse products, add to cart, and test checkout in 30 seconds.</div>
+        </div>
+        <a href="/public" class="btn btn-light btn-lg px-4">
+          Go to Customer View ➜
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

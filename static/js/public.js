@@ -178,7 +178,9 @@ function renderGrid(products) {
     });
   });
 }
-
+const API_BASE = window.location.hostname.includes("localhost")
+   ? "http://localhost:5000"
+   : "https://omni-cart-12.vercel.app/"; // 👈 your Flask backend
 function applyFilter(){
   const q = (document.getElementById("publicSearch")?.value || "").toLowerCase();
   const catDrop = document.getElementById("publicCategory")?.value || "";

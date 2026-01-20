@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3 class="m-0">Dashboard</h3>
+    <div class="text-muted small" id="roleLine">Loading user...</div>
+  </div>
+  <button class="btn btn-outline-danger btn-sm" id="logoutBtn">Logout</button>
+</div>
+
+<div id="msg" class="mb-3"></div>
+
+<div class="d-flex gap-2 mb-2">
+  <button class="btn btn-outline-primary btn-sm range-btn" data-range="today">Today</button>
+  <button class="btn btn-outline-primary btn-sm range-btn" data-range="7days">Last 7 Days</button>
+  <button class="btn btn-outline-primary btn-sm range-btn" data-range="month">This Month</button>
+</div>
+
+
+<!-- KPI Cards -->
+<div class="row g-3 mb-3">
+  <div class="col-md-3"><div class="card shadow-sm"><div class="card-body">
+    <div class="text-muted small">Total Products</div>
+    <div class="fs-4 fw-bold" id="kpiProducts">-</div>
+  </div></div></div>
+
+  <div class="col-md-3"><div class="card shadow-sm"><div class="card-body">
+    <div class="text-muted small">Total Customers</div>
+    <div class="fs-4 fw-bold" id="kpiCustomers">-</div>
+  </div></div></div>
+
+  <div class="col-md-3"><div class="card shadow-sm"><div class="card-body">
+    <div class="text-muted small">Low Stock (&lt; 5)</div>
+    <div class="fs-4 fw-bold" id="kpiLowStock">-</div>
+  </div></div></div>
+
+  <div class="col-md-3"><div class="card shadow-sm"><div class="card-body">
+    <div class="text-muted small">Total Revenue</div>
+    <div class="fs-4 fw-bold" id="kpiRevenue">-</div>
+  </div></div></div>
+</div>
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="card shadow-sm rounded-4">
+      <div class="card-header bg-white"><strong>Top Products</strong></div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead><tr><th>Product</th><th class="text-end">Qty</th><th class="text-end">Revenue</th></tr></thead>
+            <tbody id="topProductsBody">
+              <tr><td colspan="3" class="text-muted text-center">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card shadow-sm rounded-4">
+      <div class="card-header bg-white"><strong>Recent Orders</strong></div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead><tr><th>Code</th><th>Status</th><th class="text-end">Total</th><th>Date</th></tr></thead>
+            <tbody id="recentOrdersBody">
+              <tr><td colspan="4" class="text-muted text-center">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Sales Chart -->
+<div class="card shadow-sm mb-3">
+  <div class="card-header bg-white d-flex justify-content-between align-items-center">
+    <strong>Revenue by Date</strong>
+    <span class="text-muted small">Auto from Sales sheet</span>
+  </div>
+  <div class="card-body">
+    <canvas id="revenueChart" height="90"></canvas>
+    <div id="chartEmpty" class="text-muted small mt-2" style="display:none;">
+      No sales yet. Record a sale to see the chart 📈
+    </div>
+  </div>
+</div>
+
+
+<!-- Products Section -->
+<div class="card shadow-sm mb-3">
+  <div class="card-header bg-white d-flex justify-content-between align-items-center">
+    <strong>Products</strong>
+    <input class="form-control form-control-sm w-auto" id="searchBox" placeholder="Search product...">
+  </div>
+
+  <div class="card-body">
+    <!-- Add Product (Staff only) -->
+    <div id="addProductBox" class="mb-3">
+      <form id="addProductForm" class="row g-2">
+        <div class="col-md-4">
+          <input class="form-control" name="product_name" placeholder="Product name" required>
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" name="category" placeholder="Category" required>
+        </div>
+        <div class="col-md-2">
+          <input class="form-control" name="price" type="number" step="0.01" min="0" placeholder="Price" required>
+        </div>
+        <div class="col-md-2">
+          <input class="form-control" name="quantity" type="number" min="0" placeholder="Qty" required>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-primary w-100" type="submit">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th><th>Name</th><th>Category</th>
+            <th class="text-end">Price</th>
+            <th class="text-end">Qty</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="productsBody">
+          <tr><td colspan="7" class="text-center text-muted">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- Sales Section -->
+<div class="card shadow-sm mb-3">
+  <div class="card-header bg-white">
+    <strong>Sales</strong>
+  </div>
+
+  <div class="card-body">
+    <!-- Record Sale -->
+    <div class="mb-3">
+      <h6 class="fw-bold mb-2">Record Sale</h6>
+
+      <form id="saleForm" class="row g-2">
+        <div class="col-md-4">
+          <select class="form-select" id="saleCustomer" required>
+            <option value="">Loading customers...</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <select class="form-select" id="saleProduct" required>
+            <option value="">Loading products...</option>
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <input class="form-control" id="saleQty" type="number" min="1" placeholder="Qty" required>
+        </div>
+
+        <div class="col-md-2">
+          <button class="btn btn-success w-100" type="submit">Sell</button>
+        </div>
+      </form>
+
+      <div class="form-text text-success mt-2">
+        Stock will reduce automatically after sale ✅
+      </div>
+    </div>
+
+    <!-- Sales History -->
+    <h6 class="fw-bold mb-2">Sales History</h6>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Sale ID</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th class="text-end">Qty</th>
+            <th class="text-end">Total</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="salesBody">
+          <tr><td colspan="6" class="text-center text-muted">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/dashboard.js"></script>
+<script src="/static/js/products.js"></script>
+<script src="/static/js/sales.js"></script>
+<!-- <script src="/static/js/dashboard_analytics.js"></script> -->
+
+{% endblock %}
